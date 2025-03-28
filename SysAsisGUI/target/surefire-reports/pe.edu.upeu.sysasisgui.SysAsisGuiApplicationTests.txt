@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: pe.edu.upeu.sysasisgui.SysAsisGuiApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.995 s -- in pe.edu.upeu.sysasisgui.SysAsisGuiApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.060 s -- in pe.edu.upeu.sysasisgui.SysAsisGuiApplicationTests

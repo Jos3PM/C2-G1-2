@@ -1,1 +1,8 @@
+pe\edu\upeu\sysasisgui\Application.class
+pe\edu\upeu\sysasisgui\servicio\EstudianteServicio.class
+pe\edu\upeu\sysasisgui\control\AsistenciaControl$1.class
+pe\edu\upeu\sysasisgui\servicio\AsistenciaServicio.class
+pe\edu\upeu\sysasisgui\control\AsistenciaControl.class
 pe\edu\upeu\sysasisgui\SysAsisGuiApplication.class
+pe\edu\upeu\sysasisgui\modelo\Asistencia.class
+pe\edu\upeu\sysasisgui\modelo\Estudiante.class
