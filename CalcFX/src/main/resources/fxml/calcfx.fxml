@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.calfx.control.CalcfxControl">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.calfx.control.CalcfxControl">
    <children>
       <HBox layoutX="14.0" layoutY="14.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -37,7 +37,7 @@
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font></Button>
-                        <Button fx:id="btndiv" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="/" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <Button fx:id="btndiv" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#controlClick" text="/" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font></Button>
@@ -53,7 +53,7 @@
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font></Button>
-                        <Button fx:id="btnmul" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="*" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                        <Button fx:id="btnmul" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#controlClick" text="*" GridPane.columnIndex="3" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font></Button>
@@ -69,7 +69,7 @@
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font></Button>
-                        <Button fx:id="btnres" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="-" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                        <Button fx:id="btnres" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#controlClick" text="-" GridPane.columnIndex="3" GridPane.rowIndex="3">
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font></Button>
@@ -77,15 +77,15 @@
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font></Button>
-                        <Button fx:id="btnborrar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="C" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Button fx:id="btnborrar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#controlClick" text="C" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font></Button>
-                        <Button fx:id="btnigual" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="=" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                        <Button fx:id="btnigual" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#controlClick" text="=" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font></Button>
-                        <Button fx:id="btnsum" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="+" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                        <Button fx:id="btnsum" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#controlClick" text="+" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font></Button>
@@ -95,7 +95,7 @@
                </children></AnchorPane>
             <AnchorPane prefHeight="390.0" prefWidth="267.0">
                <children>
-                  <TableView layoutX="14.0" layoutY="6.0" prefWidth="250.0" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="20.0">
+                  <TableView layoutX="14.0" layoutY="6.0" prefHeight="362.0" prefWidth="250.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="20.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
                       <TableColumn prefWidth="75.0" text="C2" />
