@@ -1,14 +1,40 @@
 package pe.edu.upeu.calfx.control;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Controller;
+import pe.edu.upeu.calfx.modelo.CalcTO;
+import pe.edu.upeu.calfx.servicio.CalcServicioI;
 
 
 @Controller
 public class CalcfxControl {
+
+    @Autowired
+    CalcServicioI servicioI;
+
+    @FXML
+    TableView<CalcTO> tableView;
+    private ObservableList<CalcTO> datos;
+
+    @FXML
+    TableColumn<CalcTO, String> num1x;
+    @FXML
+    TableColumn<CalcTO, String> num2x;
+    @FXML
+    TableColumn<CalcTO, String> operx;
+    @FXML
+    TableColumn<CalcTO, String> resultx;
+
 
     @FXML
     private TextField txtResultado;
@@ -18,7 +44,14 @@ public class CalcfxControl {
     }
 
     private void agregarOperador(String operador) {
-        txtResultado.appendText(" " + operador + " ");
+        if(!txtResultado.getText().isEmpty() && txtResultado.getText().length()>=4){
+            char op = txtResultado.getText().charAt(txtResultado.getText().length()-2);
+            if(op!='+' && op!='-' && op!='/'&& op!='*'){
+                txtResultado.appendText(" " + operador + " ");
+            }
+        }else{
+            txtResultado.appendText(" " + operador + " ");
+        }
     }
 
     private void calcularResultado() {
@@ -51,6 +84,13 @@ public class CalcfxControl {
                     break;
             }
             txtResultado.setText(String.valueOf(resultado));
+            CalcTO to = new CalcTO();
+            to.setNum1(String.valueOf(num1));
+            to.setNum2(String.valueOf(num2));
+            to.setOperador(operador.charAt(0));
+            to.setResultado(String.valueOf(resultado));
+            servicioI.save(to);
+
         } catch (Exception e) {
             txtResultado.setText("Error");
             System.out.println(e.getMessage());
