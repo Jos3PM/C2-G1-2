@@ -10,13 +10,13 @@ public class TresEnRayaApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tres.fxml"));
 		Parent root = loader.load();
 
 		// Configuracion no olvidar
 		primaryStage.setTitle("Tres en Raya");
 		primaryStage.setScene(new Scene(root));
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 

@@ -1,45 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.tresenraya.control.controller">
-    <children>
-        <Text fx:id="winnerText" layoutX="55.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="214.39999999999992">
-            <font>
-                <Font size="39.0" />
-            </font>
-        </Text>
-        <Button layoutX="215.0" layoutY="321.0" mnemonicParsing="false" onAction="#restartGame" text="Restart" />
-        <GridPane layoutX="55.0" layoutY="35.0" prefHeight="208.0" prefWidth="214.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.tresenraya.control.controller">
+    <left>
+        <VBox prefHeight="550.0" prefWidth="400.0" spacing="10.0" styleClass="game-board" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="button1" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
-                <Button fx:id="button2" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="1" />
-                <Button fx:id="button3" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="2" />
-                <Button fx:id="button4" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" GridPane.rowIndex="1" />
-                <Button fx:id="button5" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Button fx:id="button6" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <Button fx:id="button7" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" GridPane.rowIndex="2" />
-                <Button fx:id="button8" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Button fx:id="button9" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <GridPane fx:id="gameBoard" alignment="CENTER" gridLinesVisible="true" prefHeight="350.0" prefWidth="400.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="button1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="game-button" />
+                        <Button fx:id="button2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="game-button" GridPane.columnIndex="1" />
+                        <Button fx:id="button3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="game-button" GridPane.columnIndex="2" />
+                        <Button fx:id="button4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="game-button" GridPane.rowIndex="1" />
+                        <Button fx:id="button5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="button6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="game-button" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Button fx:id="button7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="game-button" GridPane.rowIndex="2" />
+                        <Button fx:id="button8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="game-button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button fx:id="button9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="game-button" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                    </VBox.margin>
+                </GridPane>
+                <HBox alignment="CENTER" prefHeight="35.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Text fx:id="txtTurno" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="turn-indicator" text="Turno: Jugador 1 (X)" textAlignment="CENTER" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="score-display" text="Jugador 1:" />
+                        <Text fx:id="txtPuntajeJugador1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="score-display" text="0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="score-display" text="Jugador 2:" />
+                        <Text fx:id="txtPuntajeJugador2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="score-display" text="0" />
+                    </children>
+                </HBox>
             </children>
-        </GridPane>
-      <TableView layoutX="321.0" layoutY="35.0" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-    </children>
-</AnchorPane>
+        </VBox>
+    </left>
+    <center>
+        <VBox prefHeight="550.0" prefWidth="500.0" styleClass="control-panel" BorderPane.alignment="CENTER">
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="200.0" spacing="10.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre Jugador 1:" />
+                                <TextField fx:id="txtPlayer1" prefHeight="26.0" prefWidth="220.0" styleClass="player-name-input" />
+                            </children>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="200.0" spacing="10.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre Jugador 2:" />
+                                <TextField fx:id="txtPlayer2" prefHeight="26.0" prefWidth="220.0" styleClass="player-name-input" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="15.0">
+                            <children>
+                                <Button fx:id="btnIniciar" mnemonicParsing="false" onAction="#onIniciarClick" prefHeight="35.0" prefWidth="80.0" styleClass="button-iniciar" text="Iniciar" />
+                                <Button fx:id="btnAnular" mnemonicParsing="false" onAction="#onAnularClick" prefHeight="35.0" prefWidth="80.0" styleClass="button-anular" text="Anular" />
+                            </children>
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets left="10.0" right="10.0" />
+                    </padding>
+                </VBox>
+                <VBox prefHeight="350.0" prefWidth="100.0" spacing="10.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tabla de Puntajes" textAlignment="CENTER" wrappingWidth="479.7366943359375">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Text>
+                        <TableView fx:id="tableScores" prefHeight="300.0" prefWidth="200.0" styleClass="score-table">
+                            <columns>
+                                <TableColumn fx:id="colPartida" prefWidth="95.0" text="Nombre Partida" />
+                                <TableColumn fx:id="colJugador1" prefWidth="95.0" text="Nombre Jugador 1" />
+                                <TableColumn fx:id="colJugador2" prefWidth="95.0" text="Nombre Jugador 2" />
+                                <TableColumn fx:id="colGanador" prefWidth="95.0" text="Nombre Ganador" />
+                                <TableColumn fx:id="colPuntuacion" prefWidth="75.0" text="Puntuación" />
+                                <TableColumn fx:id="colEstado" prefWidth="75.0" text="Estado" />
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                        </TableView>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

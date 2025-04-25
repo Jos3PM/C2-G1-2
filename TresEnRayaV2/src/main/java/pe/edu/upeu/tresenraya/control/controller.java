@@ -1,10 +1,19 @@
 package pe.edu.upeu.tresenraya.control;
 
-import javafx.event.ActionEvent;
+import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
+import pe.edu.upeu.tresenraya.model.Game;
+import pe.edu.upeu.tresenraya.model.GameDatabase;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,80 +22,147 @@ import java.util.ResourceBundle;
 
 public class controller implements Initializable {
 
-    @FXML
-    private Button button1;
+    @FXML private Button button1, button2, button3, button4, button5, button6, button7, button8, button9;
+    @FXML private Button btnIniciar, btnAnular;
+    @FXML private TextField txtPlayer1, txtPlayer2;
+    @FXML private Text txtTurno, txtPuntajeJugador1, txtPuntajeJugador2;
+    @FXML private TableView<Game> tableScores;
+    @FXML private TableColumn<Game, String> colPartida, colJugador1, colJugador2, colGanador, colEstado;
+    @FXML private TableColumn<Game, Integer> colPuntuacion;
+    @FXML private GridPane gameBoard;
 
-    @FXML
-    private Button button2;
-
-    @FXML
-    private Button button3;
-
-    @FXML
-    private Button button4;
-
-    @FXML
-    private Button button5;
-
-    @FXML
-    private Button button6;
-
-    @FXML
-    private Button button7;
-
-    @FXML
-    private Button button8;
-
-    @FXML
-    private Button button9;
-
-    @FXML
-    private Text winnerText;
-
-    private int playerTurn = 0;
-
-    ArrayList<Button> buttons;
-
+    private ArrayList<Button> buttons;
+    private int playerTurn = 0; // 0 = X, 1 = O
+    private GameDatabase gameDb;
+    private Game currentGame;
+    private ObservableList<Game> gamesList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
+        // Initialize buttons list
+        buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
 
-        buttons.forEach(button ->{
+        // Set up game buttons
+        buttons.forEach(button -> {
             setupButton(button);
-            button.setFocusTraversable(false);
+            button.setDisable(true); // Disabled by default
         });
+
+        // Initialize game database
+        gameDb = GameDatabase.getInstance();
+
+        // Set up table columns
+        colPartida.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colJugador1.setCellValueFactory(new PropertyValueFactory<>("player1"));
+        colJugador2.setCellValueFactory(new PropertyValueFactory<>("player2"));
+        colGanador.setCellValueFactory(new PropertyValueFactory<>("winner"));
+        colPuntuacion.setCellValueFactory(new PropertyValueFactory<>("score"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("state"));
+
+        // Load games into table
+        loadGamesTable();
+
+        // Set up button states
+        btnAnular.setDisable(true);
+
+        // Initialize score display
+        txtPuntajeJugador1.setText("0");
+        txtPuntajeJugador2.setText("0");
+
+        // Set initial turn display
+        updateTurnDisplay();
+    }
+
+    private void loadGamesTable() {
+        gamesList = FXCollections.observableArrayList(gameDb.getAllGames());
+        tableScores.setItems(gamesList);
+    }
+
+    private void updateTurnDisplay() {
+        String player1 = txtPlayer1.getText().isEmpty() ? "Jugador 1" : txtPlayer1.getText();
+        String player2 = txtPlayer2.getText().isEmpty() ? "Jugador 2" : txtPlayer2.getText();
+
+        if (playerTurn == 0) {
+            txtTurno.setText("Turno: " + player1 + " (X)");
+        } else {
+            txtTurno.setText("Turno: " + player2 + " (O)");
+        }
     }
 
     @FXML
-    void restartGame(ActionEvent event) {
-        buttons.forEach(this::resetButton);
+    void onIniciarClick() {
+        // Enable all game buttons
+        buttons.forEach(button -> {
+            button.setDisable(false);
+            button.setText("");
+            button.setStyle("-fx-background-color: #f0f0f0;");
+        });
+
+        btnIniciar.setDisable(true);
+        btnAnular.setDisable(false);
+
+        playerTurn = 0;
+        updateTurnDisplay();
+
+        txtPuntajeJugador1.setText("0");
+        txtPuntajeJugador2.setText("0");
+
+        String player1 = txtPlayer1.getText().isEmpty() ? "Jugador 1" : txtPlayer1.getText();
+        String player2 = txtPlayer2.getText().isEmpty() ? "Jugador 2" : txtPlayer2.getText();
+        currentGame = new Game(player1, player2);
+        gameDb.addGame(currentGame);
+
+        loadGamesTable();
+        tableScores.scrollTo(tableScores.getItems().size() - 1);
     }
 
-    public void resetButton(Button button){
-        button.setDisable(false);
-        button.setText("");
+    @FXML
+    void onAnularClick() {
+        buttons.forEach(button -> {
+            button.setDisable(true);
+        });
+
+        btnIniciar.setDisable(false);
+        btnAnular.setDisable(true);
+
+        gameDb.updateCurrentGame("Anulado", 0, "Anulado");
+
+        loadGamesTable();
+        tableScores.scrollTo(tableScores.getItems().size() - 1);
     }
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
             setPlayerSymbol(button);
             button.setDisable(true);
+
+            FadeTransition ft = new FadeTransition(Duration.millis(300), button);
+            ft.setFromValue(0.7);
+            ft.setToValue(1.0);
+            ft.play();
+
             checkIfGameIsOver();
         });
     }
 
-    public void setPlayerSymbol(Button button){
-        if(playerTurn % 2 == 0){
+    private void setPlayerSymbol(Button button) {
+        if (playerTurn == 0) {
             button.setText("X");
+            button.setStyle("-fx-text-fill: #ff0000; -fx-font-weight: bold; -fx-font-size: 24;");
             playerTurn = 1;
-        } else{
+        } else {
             button.setText("O");
+            button.setStyle("-fx-text-fill: #0000ff; -fx-font-weight: bold; -fx-font-size: 24;");
             playerTurn = 0;
         }
+        updateTurnDisplay();
     }
 
-    public void checkIfGameIsOver(){
+    private void checkIfGameIsOver() {
+        boolean gameOver = false;
+        String winner = "";
+        int score = 0;
+
         for (int a = 0; a < 8; a++) {
             String line = switch (a) {
                 case 0 -> button1.getText() + button2.getText() + button3.getText();
@@ -100,15 +176,135 @@ public class controller implements Initializable {
                 default -> null;
             };
 
-            //X winner
+            // X
             if (line.equals("XXX")) {
-                winnerText.setText("X GANA");
+                gameOver = true;
+                winner = txtPlayer1.getText() + " Ganador";
+                score = 1;
+                highlightWinningLine(a);
+                break;
             }
-
-            //O winner
+            // O
             else if (line.equals("OOO")) {
-                winnerText.setText("O GANA");
+                gameOver = true;
+                winner = txtPlayer2.getText() + " Ganador";
+                score = 1;
+                highlightWinningLine(a);
+                break;
             }
         }
+
+        boolean allButtonsDisabled = true;
+        for (Button button : buttons) {
+            if (!button.isDisabled() && button.getText().isEmpty()) {
+                allButtonsDisabled = false;
+                break;
+            }
+        }
+
+        if (allButtonsDisabled && !gameOver) {
+            gameOver = true;
+            winner = "Empate";
+            score = 0;
+        }
+
+        // Update game state if game is over
+        if (gameOver) {
+            // Update scores
+            if (winner.contains(txtPlayer1.getText())) {
+                txtPuntajeJugador1.setText("1");
+                txtPuntajeJugador2.setText("0");
+            } else if (winner.contains(txtPlayer2.getText())) {
+                txtPuntajeJugador1.setText("0");
+                txtPuntajeJugador2.setText("1");
+            } else {
+                txtPuntajeJugador1.setText("0");
+                txtPuntajeJugador2.setText("0");
+            }
+
+            // Disable remaining buttons
+            buttons.forEach(button -> {
+                if (button.getText().isEmpty()) {
+                    button.setDisable(true);
+                }
+            });
+
+            // Update game in database
+            gameDb.updateCurrentGame(winner, score, "Terminado");
+
+            // Update table
+            loadGamesTable();
+            tableScores.scrollTo(tableScores.getItems().size() - 1);
+
+            // Enable iniciar button for a new game
+            btnIniciar.setDisable(false);
+        }
+    }
+
+    private void highlightWinningLine(int line) {
+        Color winColor = Color.rgb(50, 205, 50, 0.3); // Light green with transparency
+        String highlightStyle = String.format("-fx-background-color: #%02X%02X%02X%02X;",
+                (int)(winColor.getRed() * 255),
+                (int)(winColor.getGreen() * 255),
+                (int)(winColor.getBlue() * 255),
+                (int)(winColor.getOpacity() * 255));
+
+        switch (line) {
+            case 0 -> { // Top row
+                button1.setStyle(button1.getStyle() + highlightStyle);
+                button2.setStyle(button2.getStyle() + highlightStyle);
+                button3.setStyle(button3.getStyle() + highlightStyle);
+            }
+            case 1 -> { // Middle row
+                button4.setStyle(button4.getStyle() + highlightStyle);
+                button5.setStyle(button5.getStyle() + highlightStyle);
+                button6.setStyle(button6.getStyle() + highlightStyle);
+            }
+            case 2 -> { // Bottom row
+                button7.setStyle(button7.getStyle() + highlightStyle);
+                button8.setStyle(button8.getStyle() + highlightStyle);
+                button9.setStyle(button9.getStyle() + highlightStyle);
+            }
+            case 3 -> { // Diagonal \
+                button1.setStyle(button1.getStyle() + highlightStyle);
+                button5.setStyle(button5.getStyle() + highlightStyle);
+                button9.setStyle(button9.getStyle() + highlightStyle);
+            }
+            case 4 -> { // Diagonal /
+                button3.setStyle(button3.getStyle() + highlightStyle);
+                button5.setStyle(button5.getStyle() + highlightStyle);
+                button7.setStyle(button7.getStyle() + highlightStyle);
+            }
+            case 5 -> { // Left column
+                button1.setStyle(button1.getStyle() + highlightStyle);
+                button4.setStyle(button4.getStyle() + highlightStyle);
+                button7.setStyle(button7.getStyle() + highlightStyle);
+            }
+            case 6 -> { // Middle column
+                button2.setStyle(button2.getStyle() + highlightStyle);
+                button5.setStyle(button5.getStyle() + highlightStyle);
+                button8.setStyle(button8.getStyle() + highlightStyle);
+            }
+            case 7 -> { // Right column
+                button3.setStyle(button3.getStyle() + highlightStyle);
+                button6.setStyle(button6.getStyle() + highlightStyle);
+                button9.setStyle(button9.getStyle() + highlightStyle);
+            }
+        }
+    }
+
+    @FXML
+    void restartGame() {
+        buttons.forEach(button -> {
+            button.setDisable(true);
+            button.setText("");
+            button.setStyle("-fx-background-color: #f0f0f0;");
+        });
+
+        playerTurn = 0;
+        updateTurnDisplay();
+
+        btnIniciar.setDisable(false);
+        btnAnular.setDisable(true);
     }
 }
