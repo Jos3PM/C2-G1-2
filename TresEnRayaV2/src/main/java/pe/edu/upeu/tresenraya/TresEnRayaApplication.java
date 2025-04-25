@@ -1,13 +1,26 @@
 package pe.edu.upeu.tresenraya;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-@SpringBootApplication
-public class TresEnRayaApplication {
+public class TresEnRayaApplication extends Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TresEnRayaApplication.class, args);
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tres.fxml"));
+		Parent root = loader.load();
+
+		// Configuracion no olvidar
+		primaryStage.setTitle("Tres en Raya");
+		primaryStage.setScene(new Scene(root));
+		primaryStage.show();
 	}
 
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
