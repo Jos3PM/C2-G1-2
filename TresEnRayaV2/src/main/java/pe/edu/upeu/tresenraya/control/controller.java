@@ -32,26 +32,22 @@ public class controller implements Initializable {
     @FXML private GridPane gameBoard;
 
     private ArrayList<Button> buttons;
-    private int playerTurn = 0; // 0 = X, 1 = O
+    private int playerTurn = 0;
     private GameDatabase gameDb;
     private Game currentGame;
     private ObservableList<Game> gamesList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Initialize buttons list
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
 
-        // Set up game buttons
         buttons.forEach(button -> {
             setupButton(button);
-            button.setDisable(true); // Disabled by default
+            button.setDisable(true);
         });
 
-        // Initialize game database
         gameDb = GameDatabase.getInstance();
 
-        // Set up table columns
         colPartida.setCellValueFactory(new PropertyValueFactory<>("id"));
         colJugador1.setCellValueFactory(new PropertyValueFactory<>("player1"));
         colJugador2.setCellValueFactory(new PropertyValueFactory<>("player2"));
@@ -59,17 +55,13 @@ public class controller implements Initializable {
         colPuntuacion.setCellValueFactory(new PropertyValueFactory<>("score"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("state"));
 
-        // Load games into table
         loadGamesTable();
 
-        // Set up button states
         btnAnular.setDisable(true);
 
-        // Initialize score display
         txtPuntajeJugador1.setText("0");
         txtPuntajeJugador2.setText("0");
 
-        // Set initial turn display
         updateTurnDisplay();
     }
 
@@ -91,7 +83,6 @@ public class controller implements Initializable {
 
     @FXML
     void onIniciarClick() {
-        // Enable all game buttons
         buttons.forEach(button -> {
             button.setDisable(false);
             button.setText("");
@@ -229,20 +220,17 @@ public class controller implements Initializable {
                 }
             });
 
-            // Update game in database
             gameDb.updateCurrentGame(winner, score, "Terminado");
 
-            // Update table
             loadGamesTable();
             tableScores.scrollTo(tableScores.getItems().size() - 1);
 
-            // Enable iniciar button for a new game
             btnIniciar.setDisable(false);
         }
     }
 
     private void highlightWinningLine(int line) {
-        Color winColor = Color.rgb(50, 205, 50, 0.3); // Light green with transparency
+        Color winColor = Color.rgb(50, 205, 50, 0.3);
         String highlightStyle = String.format("-fx-background-color: #%02X%02X%02X%02X;",
                 (int)(winColor.getRed() * 255),
                 (int)(winColor.getGreen() * 255),
@@ -250,42 +238,42 @@ public class controller implements Initializable {
                 (int)(winColor.getOpacity() * 255));
 
         switch (line) {
-            case 0 -> { // Top row
+            case 0 -> {
                 button1.setStyle(button1.getStyle() + highlightStyle);
                 button2.setStyle(button2.getStyle() + highlightStyle);
                 button3.setStyle(button3.getStyle() + highlightStyle);
             }
-            case 1 -> { // Middle row
+            case 1 -> {
                 button4.setStyle(button4.getStyle() + highlightStyle);
                 button5.setStyle(button5.getStyle() + highlightStyle);
                 button6.setStyle(button6.getStyle() + highlightStyle);
             }
-            case 2 -> { // Bottom row
+            case 2 -> {
                 button7.setStyle(button7.getStyle() + highlightStyle);
                 button8.setStyle(button8.getStyle() + highlightStyle);
                 button9.setStyle(button9.getStyle() + highlightStyle);
             }
-            case 3 -> { // Diagonal \
+            case 3 -> {
                 button1.setStyle(button1.getStyle() + highlightStyle);
                 button5.setStyle(button5.getStyle() + highlightStyle);
                 button9.setStyle(button9.getStyle() + highlightStyle);
             }
-            case 4 -> { // Diagonal /
+            case 4 -> {
                 button3.setStyle(button3.getStyle() + highlightStyle);
                 button5.setStyle(button5.getStyle() + highlightStyle);
                 button7.setStyle(button7.getStyle() + highlightStyle);
             }
-            case 5 -> { // Left column
+            case 5 -> {
                 button1.setStyle(button1.getStyle() + highlightStyle);
                 button4.setStyle(button4.getStyle() + highlightStyle);
                 button7.setStyle(button7.getStyle() + highlightStyle);
             }
-            case 6 -> { // Middle column
+            case 6 -> {
                 button2.setStyle(button2.getStyle() + highlightStyle);
                 button5.setStyle(button5.getStyle() + highlightStyle);
                 button8.setStyle(button8.getStyle() + highlightStyle);
             }
-            case 7 -> { // Right column
+            case 7 -> {
                 button3.setStyle(button3.getStyle() + highlightStyle);
                 button6.setStyle(button6.getStyle() + highlightStyle);
                 button9.setStyle(button9.getStyle() + highlightStyle);

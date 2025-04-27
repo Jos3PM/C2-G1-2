@@ -24,7 +24,7 @@ public class Game {
     }
 
     private String generateGameId() {
-        return "Partida " + (int)(Math.random() * 1000);
+        return "Partida " + (int)(Math.random() + 1);
     }
 
     // Getters
