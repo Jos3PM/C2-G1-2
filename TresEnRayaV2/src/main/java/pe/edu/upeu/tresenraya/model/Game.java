@@ -1,8 +1,6 @@
 package pe.edu.upeu.tresenraya.model;
 
-
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Game {
     private String id;
@@ -24,10 +22,9 @@ public class Game {
     }
 
     private String generateGameId() {
-        return "Partida " + (int)(Math.random() + 1);
+        return "Partida " + (int)(Math.random() * 1000);
     }
 
-    // Getters
     public String getId() { return id; }
     public String getPlayer1() { return player1; }
     public String getPlayer2() { return player2; }
@@ -36,16 +33,7 @@ public class Game {
     public String getState() { return state; }
     public LocalDateTime getTimestamp() { return timestamp; }
 
-    // Setters
     public void setWinner(String winner) { this.winner = winner; }
     public void setScore(int score) { this.score = score; }
     public void setState(String state) { this.state = state; }
-
-    @Override
-    public String toString() {
-        return id + " - " + player1 + " vs " + player2 +
-                " - Ganador: " + winner +
-                " - Puntuación: " + score +
-                " - Estado: " + state;
-    }
 }

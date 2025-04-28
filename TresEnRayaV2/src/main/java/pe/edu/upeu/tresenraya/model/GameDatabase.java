@@ -1,4 +1,5 @@
 package pe.edu.upeu.tresenraya.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,6 @@ public class GameDatabase {
 
     private GameDatabase() {
         games = new ArrayList<>();
-        addSampleGames();
     }
 
     public static GameDatabase getInstance() {
@@ -16,9 +16,6 @@ public class GameDatabase {
             instance = new GameDatabase();
         }
         return instance;
-    }
-
-    private void addSampleGames() {
     }
 
     public void addGame(Game game) {
