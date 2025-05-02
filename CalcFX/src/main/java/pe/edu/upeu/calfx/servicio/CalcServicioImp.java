@@ -1,20 +1,25 @@
 package pe.edu.upeu.calfx.servicio;
 
-import pe.edu.upeu.calfx.modelo.CalcTO;
+
+import org.springframework.stereotype.Service;
+import pe.edu.upeu.calcfx.modelo.CalcTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalcServicioImp implements CalcServicioI{
+@Service
+public class CalcServicioImp implements CalcServicioI {
 
     List<CalcTO> datos=new ArrayList<>();
+    //ayList<CalcTO> datos1=new ArrayList<>();
 
     @Override
-    public void save(CalcTO calcTO){
+    public void save(CalcTO calcTO) {
         datos.add(calcTO);
     }
+
     @Override
-    public List<CalcTO> finAll() {
+    public List<CalcTO> findAll() {
         return datos;
     }
 
@@ -37,6 +42,4 @@ public class CalcServicioImp implements CalcServicioI{
     public void deleteById(int index) {
         datos.remove(index);
     }
-
 }
-

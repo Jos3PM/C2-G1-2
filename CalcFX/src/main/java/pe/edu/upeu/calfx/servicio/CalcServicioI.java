@@ -1,19 +1,19 @@
 package pe.edu.upeu.calfx.servicio;
 
-import pe.edu.upeu.calfx.modelo.CalcTO;
+import pe.edu.upeu.calcfx.modelo.CalcTO;
 
 import java.util.List;
 
 public interface CalcServicioI {
-
-    public List<CalcTO> finAll();
-    public CalcTO findById(int index);
-
+    //C
     public void save(CalcTO calcTO);
-
+    //R
+    public List<CalcTO> findAll();
+    public CalcTO findById(int index);
+    //U
+    public void update(CalcTO calcTO, int index);
+    //D
     public void delete(CalcTO calcTO);
     public void deleteById(int index);
-
-    public void update(CalcTO calcTO, int index);
 
 }
