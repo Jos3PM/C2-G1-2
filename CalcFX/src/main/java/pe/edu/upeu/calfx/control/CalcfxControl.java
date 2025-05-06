@@ -12,8 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import pe.edu.upeu.calcfx.modelo.CalcTO;
-import pe.edu.upeu.calfx.servicio.CalcRepoSql;
+import pe.edu.upeu.calfx.modelo.CalcTO;
 import pe.edu.upeu.calfx.servicio.CalcServicioI;
 
 import java.util.List;
@@ -45,9 +44,6 @@ public class CalcfxControl {
 
     int indexID=-1;
     int idx=0;
-
-    @Autowired
-    CalcRepoSql calcRepoSql;
 
     @FXML
     private void initialize() {
@@ -114,9 +110,8 @@ public class CalcfxControl {
             to.setOperador(operador.charAt(0));
             to.setResultado(String.valueOf(resultado));
             if(indexID!=-1){
-                calcRepoSql.actualizarEntidad(to, to.getId());
+                servicioI.update(to, Long.valueOf(indexID));
             }else{
-                calcRepoSql.guardarEntidad(to);
                 servicioI.save(to);
             }
 
@@ -147,8 +142,7 @@ public class CalcfxControl {
 
         addActionButtonsToTable();
 
-        //datos = FXCollections.observableArrayList(lista);
-        datos = FXCollections.observableArrayList(calcRepoSql.listarEntidad());
+        datos = FXCollections.observableArrayList(lista);
         tableView.setItems(datos);
 
     }
@@ -206,4 +200,5 @@ public class CalcfxControl {
         servicioI.delete(to);
         listar();
     }
+
 }
