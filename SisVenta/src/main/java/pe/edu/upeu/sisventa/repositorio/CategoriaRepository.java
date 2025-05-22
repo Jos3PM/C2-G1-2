@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upeu.sisventa.modelo.Categoria;
 
 @Repository
-public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
+
 }

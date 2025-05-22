@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upeu.sisventa.modelo.Proveedor;
 
 @Repository
-public interface ProveedorRepository extends JpaRepository<Proveedor, Integer> {
+public interface ProveedorRepository extends JpaRepository<Proveedor, Long> {
 }

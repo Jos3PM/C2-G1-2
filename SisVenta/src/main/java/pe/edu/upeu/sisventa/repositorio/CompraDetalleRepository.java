@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upeu.sisventa.modelo.CompraDetalle;
 
 @Repository
-public interface CompraDetalleRepository extends JpaRepository<CompraDetalle, Integer> {
+public interface CompraDetalleRepository extends JpaRepository<CompraDetalle, Long> {
 }

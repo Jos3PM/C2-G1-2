@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upeu.sisventa.modelo.Perfil;
 
 @Repository
-public interface PerfilRepository extends JpaRepository<Perfil, Integer> {
+public interface PerfilRepository extends JpaRepository<Perfil, Long> {
 }

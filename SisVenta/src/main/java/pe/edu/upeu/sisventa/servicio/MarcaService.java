@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upeu.sisventa.modelo.Marca;
 import pe.edu.upeu.sisventa.modelo.Producto;
-import pe.edu.upeu.sisventa.repositorio.MarcaRepository;
 
 import java.util.List;
 

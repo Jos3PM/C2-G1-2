@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upeu.sisventa.modelo.UnidadMedida;
 
 @Repository
-public interface UnidadMedidaRepository extends JpaRepository<UnidadMedida, Integer> {
+public interface UnidadMedidaRepository extends JpaRepository<UnidadMedida, Long> {
 }
